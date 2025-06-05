@@ -71,4 +71,15 @@ jobs:
 
       - name: Node Version anzeigen
         run: node -v
-        
+
+  github_script_job:
+    name: Repository-Name auslesen
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Aktuellen Repo-Namen ausgeben
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const repo = context.repo.repo;
+            console.log(`Aktueller Repository-Name: ${repo}`);
