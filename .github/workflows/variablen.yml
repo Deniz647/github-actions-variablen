@@ -41,3 +41,18 @@ jobs:
           echo "Die Länge des Secrets ist: ${#MY_SECRET}"
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
+
+  output_job:
+    name: Output erzeugen und verwenden
+    runs-on: ubuntu-latest
+
+    outputs:
+      custom_output: ${{ steps.generate_output.outputs.result }}
+
+    steps:
+      - name: Output erzeugen
+        id: generate_output
+        run: echo "result=Erfolgreich erzeugt" >> $GITHUB_OUTPUT
+
+      - name: Output verwenden
+        run: echo "Output war ${{ steps.generate_output.outputs.result }}"
