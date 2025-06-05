@@ -56,3 +56,19 @@ jobs:
 
       - name: Output verwenden
         run: echo "Output war ${{ steps.generate_output.outputs.result }}"
+  matrix_job:
+    name: Node.js-Versionen testen
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18]
+
+    steps:
+      - name: Node Version installieren
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Node Version anzeigen
+        run: node -v
+        
