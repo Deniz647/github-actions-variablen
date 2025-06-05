@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -29,3 +30,14 @@ jobs:
         run: |
           echo "ENV bleibt: $ENV"
           echo "Überschriebene VERSION: $VERSION"
+
+  secret_job:
+    name: Secret verwenden
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy-Ausgabe ohne Secret sichtbar zu machen
+        run: |
+          echo "Das Secret ist sicher gespeichert"
+          echo "Die Länge des Secrets ist: ${#MY_SECRET}"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
