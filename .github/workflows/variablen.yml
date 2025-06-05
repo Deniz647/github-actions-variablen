@@ -1,0 +1,31 @@
+name: Variablen-Demo
+
+env:
+  ENV: production
+  VERSION: v1.0
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  job1:
+    name: Global Variablen verwenden
+    runs-on: ubuntu-latest
+    steps:
+      - name: ENV und VERSION ausgeben
+        run: |
+          echo "Globale ENV: $ENV"
+          echo "Globale VERSION: $VERSION"
+
+  job2:
+    name: Variable überschreiben
+    runs-on: ubuntu-latest
+    env:
+      VERSION: v2.0
+    steps:
+      - name: Überschriebene VERSION ausgeben
+        run: |
+          echo "ENV bleibt: $ENV"
+          echo "Überschriebene VERSION: $VERSION"
